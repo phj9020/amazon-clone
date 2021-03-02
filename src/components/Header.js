@@ -4,7 +4,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 
 const HeaderContainer = styled.div`
-    min-width: 820px;
+    min-width: 850px;
     height: 70px;
     background-color: var(--amazon-bg-color);
     display:flex;
@@ -15,6 +15,7 @@ const HeaderContainer = styled.div`
     z-index:100;
     
     > img {
+        padding: 10px;
         height: 40px;
         object-fit: contain;
     }
@@ -113,7 +114,7 @@ function Header() {
             </SearchContainer>
             <HeaderRight>
                 <HeaderRightOptions>
-                    <span className="optionFirst">Hello</span>
+                    <span className="optionFirst">Hello guest</span>
                     <span className="optionSecond">Sign in</span>
                 </HeaderRightOptions>
                 <HeaderRightOptions>
