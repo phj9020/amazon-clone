@@ -7,7 +7,6 @@ import ArrowForwardIosSharpIcon from '@material-ui/icons/ArrowForwardIosSharp';
 const CarouselContainer = styled.div`
     width: 100%;
     height: 600px;
-    float: left;
 
     #img_slider_container {
         min-width: 850px;
@@ -30,7 +29,7 @@ const CarouselContainer = styled.div`
     }
 
     #img_list > li {
-        width: 33%;
+        width: 33.33%;
         height: 100%;
         position: absolute;
         left: 0px;
@@ -40,6 +39,7 @@ const CarouselContainer = styled.div`
 
     #img_list > li > img {
         width: 100%;
+        mask-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0.6));
     }
 
     .arrow_container {
@@ -51,12 +51,17 @@ const CarouselContainer = styled.div`
         display:flex;
         align-items: center;
     }
+    .next {
+        all: unset;
+        color: gray;
+    }
     .prev {
+        all: unset;
+        color: gray;
         position: absolute;
         right: 0px;
     }
     .MuiSvgIcon-root {
-        background-color: white;
         cursor: pointer;
         outline: none;
     }
@@ -65,8 +70,8 @@ const CarouselContainer = styled.div`
 
 const MyCarousel = () => {
     const imageOne ="https://images-na.ssl-images-amazon.com/images/G/01/AmazonExports/Fuji/2020/May/Hero/Fuji_TallHero_Beauty_v2_en_US_1x._CB429089975_.jpg";
-    const imageTwo ="https://images-na.ssl-images-amazon.com/images/G/01/AmazonExports/Fuji/2020/May/Hero/Fuji_TallHero_45M_v2_1x._CB432458380_.jpg";
-    const imageThree ="https://images-na.ssl-images-amazon.com/images/G/01/AmazonExports/Fuji/2020/May/Hero/Fuji_TallHero_Computers_1x._CB432469755_.jpg";
+    const imageTwo ="https://images-na.ssl-images-amazon.com/images/G/01/AmazonExports/Fuji/2020/May/Hero/Fuji_TallHero_Home_v2_en_US_2x._CB429090087_.jpg";
+    const imageThree ="https://images-na.ssl-images-amazon.com/images/G/01/AmazonExports/Fuji/2020/May/Hero/Fuji_TallHero_Toys_en_US_2x._CB431858162_.jpg";
     
     window.addEventListener("load", ()=>{
         mainslide();
