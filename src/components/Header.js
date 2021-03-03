@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components';
 import SearchIcon from '@material-ui/icons/Search';
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
+import  { Link } from "react-router-dom";
 
 const HeaderContainer = styled.div`
     min-width: 850px;
@@ -14,7 +15,7 @@ const HeaderContainer = styled.div`
     top:0;
     z-index:100;
     
-    > img {
+    > a > img {
         padding: 10px;
         height: 40px;
         object-fit: contain;
@@ -105,7 +106,7 @@ const ShoppingCart = styled(ShoppingCartOutlinedIcon)`
 function Header() {
     return (
         <HeaderContainer>
-            <img src="http://pngimg.com/uploads/amazon/amazon_PNG25.png" alt="AmazonLogo" />
+            <Link to="/" ><img src="http://pngimg.com/uploads/amazon/amazon_PNG25.png" alt="AmazonLogo" /></Link>
             <SearchContainer>
                 <form>
                     <input type="text" />

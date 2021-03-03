@@ -31,10 +31,11 @@ const ProductContainer = styled.div`
 `
 
 function Product({title, price, stars, img, alt}) {
-    const starsNum = parseInt(stars);
+    
     const onClick = (e) => {
         e.preventDefault();
         console.log("Add to Cart")
+        console.log(e.target.previousElementSibling.previousElementSibling.previousElementSibling.children[1].innerText)
     }
     return (
         <ProductContainer>
@@ -44,7 +45,7 @@ function Product({title, price, stars, img, alt}) {
                 <strong>{price}</strong>
             </div>
             <div className="product__rating">
-                <p>{"⭐".repeat(starsNum)}</p>
+                <p>{"⭐".repeat(stars)}</p>
             </div>
             <img src={img} alt={alt} />
             <button onClick={onClick}>Add to Basket</button>

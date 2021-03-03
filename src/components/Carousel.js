@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import styled from 'styled-components';
 import gsap from "gsap";
 import ArrowBackIosSharpIcon from '@material-ui/icons/ArrowBackIosSharp';
@@ -73,6 +73,10 @@ const MyCarousel = () => {
     const imageTwo ="https://images-na.ssl-images-amazon.com/images/G/01/AmazonExports/Fuji/2020/May/Hero/Fuji_TallHero_Home_v2_en_US_2x._CB429090087_.jpg";
     const imageThree ="https://images-na.ssl-images-amazon.com/images/G/01/AmazonExports/Fuji/2020/May/Hero/Fuji_TallHero_Toys_en_US_2x._CB431858162_.jpg";
     
+    useEffect(()=> {
+        mainslide();
+    }, [])
+
     window.addEventListener("load", ()=>{
         mainslide();
     })
