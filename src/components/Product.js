@@ -22,7 +22,7 @@ const ProductContainer = styled.div`
     > button {
         margin: 0px auto;
         width: 100px;
-        background-color: #FF9900;
+        background-color: #f0be4c;
         border: 1px solid;
         border-color: #a88734 #9c7e31 #846a29;
         cursor:pointer;

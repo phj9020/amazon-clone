@@ -76,10 +76,6 @@ const MyCarousel = () => {
     useEffect(()=> {
         mainslide();
     }, [])
-
-    window.addEventListener("load", ()=>{
-        mainslide();
-    })
     
     const mainslide = () => {
         const slideWrapper = document.querySelector("#img_slider_wrapper");

@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import  { HashRouter as Router, Route, Switch } from "react-router-dom";
+import  { HashRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import Header from "components/Header";
 import Footer from "components/Footer";
 import Home from "components/Home";
@@ -16,7 +16,7 @@ function App() {
                   <Home />
                 </Route>
                 <Route path="/cart" component={Cart}/>
-             
+                <Redirect from="*" to="/" />
             </Switch>
             <Footer />
         </Router>

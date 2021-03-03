@@ -60,6 +60,11 @@ const Search = styled(SearchIcon)`
 
 const HeaderRight= styled.div`
     display: flex;
+
+    .optionCart {
+        display: flex;
+        text-decoration: none;
+    }
 `
 
 const HeaderRightOptions = styled.div`
@@ -77,6 +82,8 @@ const HeaderRightOptions = styled.div`
         font-size: 14px;
         font-weight: 700;
     }
+
+   
 `
 
 const HeaderRightCart = styled.div`
@@ -126,9 +133,11 @@ function Header() {
                     <span className="optionFirst">Your</span>
                     <span className="optionSecond">Prime</span>
                 </HeaderRightOptions>
-                <HeaderRightCart>
-                    <ShoppingCart /><span>Cart</span><span className="numberItems">0</span>
-                </HeaderRightCart>
+                <Link to="/cart" className="optionCart">
+                    <HeaderRightCart>
+                        <ShoppingCart /><span>Cart</span><span className="numberItems">0</span>
+                    </HeaderRightCart>
+                </Link>
             </HeaderRight>
         </HeaderContainer>
     )

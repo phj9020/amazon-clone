@@ -73,7 +73,6 @@ function Home() {
               <div className="product_info4"><Product title="Byootique Antique Pink Rolling Makeup Case 4in1 Cosmetic Lockable Trolley 4 Removable Wheels Nail Artist Travel Train Organizer Box" price="169.90" stars={4} img="https://images-na.ssl-images-amazon.com/images/I/71XbMGX-2jL._SX425_.jpg" alt="the lean startup books" /></div>
               <div className="product_info5"><Product title="IT Cosmetics Your Skin But Better CC+ Cream, Light Medium (C) - Color Correcting Cream, Full-Coverage Foundation, Anti-Aging Serum & SPF 50+ Sunscreen - Natural Finish - 1.08 fl oz" price="39.50" stars={4} img="https://images-na.ssl-images-amazon.com/images/I/71yKJZ7BENL._SX425_.jpg" alt="ccCream" /></div>
               <div className="product_info6"><Product title="LG 27GL83A-B 27 Inch Ultragear QHD IPS 1ms NVIDIA G-SYNC Compatible Gaming Monitor, Black" price="379.99" stars={5} img="https://images-na.ssl-images-amazon.com/images/I/91lS5yEDH-L._AC_SX679_.jpg" alt="LGMonitor" /></div>
-            
             </div>
         </ProductContainer>
     </HomeContainer>
