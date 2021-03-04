@@ -86,7 +86,7 @@ const CartRight = styled.div`
     
 `
 
-function Cart() {
+function Cart({isLoggedIn}) {
     const {basket} = useStateValue();
     const dispatch = useDispatch();
     console.log(basket)
@@ -96,7 +96,7 @@ function Cart() {
         const {parentNode : {parentNode : {id}}} = e.target;
         dispatch({type: REMOVE, id: id});
     }
-    
+   
     return (
         <CartContainer>
             <CartLeft>
@@ -123,7 +123,7 @@ function Cart() {
             </CartLeft>
             <CartRight>
                 <div className="cart__subtotalbox">
-                    <Subtotal />
+                    <Subtotal isLoggedIn={isLoggedIn} />
                 </div>
             </CartRight>
         </CartContainer>

@@ -4,6 +4,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import  { Link } from "react-router-dom";
 import {useStateValue} from 'StateProvider';
+import { authService } from 'fbase';
 
 const HeaderContainer = styled.div`
     min-width: 850px;
@@ -113,8 +114,18 @@ const ShoppingCart = styled(ShoppingCartOutlinedIcon)`
 `
 
 
-function Header() {
+function Header({isLoggedIn, userObj}) {
     const {basket} = useStateValue();
+    
+    const signOut = async(e) => {
+        e.preventDefault();
+        try {
+            await authService.signOut();
+        } catch (err) {
+            console.log(err);
+        } 
+    }
+
 
     return (
         <HeaderContainer>
@@ -126,12 +137,20 @@ function Header() {
                 </form>
             </SearchContainer>
             <HeaderRight>
-                <Link to="/login" >
+                {isLoggedIn ? (
+                    <HeaderRightOptions onClick={signOut}>
+                        <span className="optionFirst">Hello! {userObj.email}</span>
+                        <span className="optionSecond">Sign out</span>
+                    </HeaderRightOptions>
+                ) : (
+                    <Link to="/login" >
                     <HeaderRightOptions>
                         <span className="optionFirst">Hello guest</span>
                         <span className="optionSecond">Sign in</span>
                     </HeaderRightOptions>
                 </Link>
+                )}
+                
                 <HeaderRightOptions>
                     <span className="optionFirst">Returns</span>
                     <span className="optionSecond">& Orders</span>

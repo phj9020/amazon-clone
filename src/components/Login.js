@@ -1,6 +1,8 @@
-import React from 'react';
+import React, {useState} from 'react';
+import { useHistory } from "react-router-dom";
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
+import {authService} from 'fbase';
 
 const LoginContainer = styled.div`
     width:100%;
@@ -48,11 +50,13 @@ const LoginContainer = styled.div`
                         font-weight: 500;
                         font-size: 14px;
                     }
-                    input[type="text"] {
+                    input[type="email"],
+                    input[type="password"] {
                         margin-bottom: 20px;
                         padding: 5px 0px;
+                        text-indent: 10px;
                     }
-                    input[type="button"] {
+                    input[type="submit"] {
                         background-color: rgb(242,203,105);
                         padding: 5px 0px;
                         outline: none;
@@ -77,15 +81,58 @@ const LoginContainer = styled.div`
             }
         }
     }
+`
 
+const ErrorMessage = styled.div`
+    width:100%;
+    color: red;
+    font-size: 12px;
+    text-align: center;
+    margin-bottom:5px;
 `
 
 function Login() {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [newAccount, setNewAccount] = useState(true);
+    const [error, setError] = useState('');
 
-    const signIn = (e)=> {
-        e.preventDefault();
-        console.log(e)
+    let history = useHistory();
+
+    const onChange = (e) => {
+        const { type, value } = e.target;
+
+        if(type === "email") {
+            setEmail(value)
+        } else if (type === "password") {
+            setPassword(value)
+        }
     }
+
+    
+    const signIn = async(e)=> {
+        e.preventDefault();
+        
+        // if newAccount create account in firebase 
+        try {
+            let data;
+            if(newAccount === true) {
+                data = await authService.createUserWithEmailAndPassword(email, password);
+            } else if (newAccount === false) {
+                data = await authService.signInWithEmailAndPassword(email, password);
+                console.log(data);
+            }
+        } catch (error) {
+            setError(error.message);
+        }  finally {
+            history.push("/");
+        }
+    }
+
+    const toggleAccount= () => {
+        setNewAccount(prev => !prev);
+    }
+
     return (
         <LoginContainer>
             <div className="login__wrapper">
@@ -93,15 +140,16 @@ function Login() {
                 <div className="login__box">
                     <div className="login__info">
                         <h1>Sign-In</h1>
-                        <form>
-                            <label for="email">Email</label>
-                            <input type="text" id="email"/>
-                            <label for="password">Password</label>
-                            <input type="text" id="password" />
-                            <input onClick={signIn} type="button" value="Sign In" />
+                        <form onSubmit={signIn}>
+                            <label htmlFor="email">Email</label>
+                            <input type="email" id="email" value={email} onChange={onChange} required />
+                            <label htmlFor="password">Password</label>
+                            <input type="password" id="password" value={password} onChange={onChange} autoComplete="on" required minLength="6" />
+                            <input type="submit" value={newAccount ? "Create Your Amazon Account": "Sign In"} />
+                            <ErrorMessage>{error}</ErrorMessage>
                         </form>
                         <p>By signing-in you agree to Amazon's Conditions of Use & Sale. Please see our Privacy Notice, our Cookies Notice and our interest-Based Ads Notice.</p>
-                        <button>Create Your Amazon Account</button>
+                        <button onClick={toggleAccount}>{newAccount ? "Sign in" : "Create Your Amazon Account"}</button>
                     </div>
                 </div>
 
