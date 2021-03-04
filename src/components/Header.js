@@ -61,7 +61,9 @@ const Search = styled(SearchIcon)`
 
 const HeaderRight= styled.div`
     display: flex;
-
+    a {
+        text-decoration: none;
+    }
     .optionCart {
         display: flex;
         text-decoration: none;
@@ -124,10 +126,12 @@ function Header() {
                 </form>
             </SearchContainer>
             <HeaderRight>
-                <HeaderRightOptions>
-                    <span className="optionFirst">Hello guest</span>
-                    <span className="optionSecond">Sign in</span>
-                </HeaderRightOptions>
+                <Link to="/login" >
+                    <HeaderRightOptions>
+                        <span className="optionFirst">Hello guest</span>
+                        <span className="optionSecond">Sign in</span>
+                    </HeaderRightOptions>
+                </Link>
                 <HeaderRightOptions>
                     <span className="optionFirst">Returns</span>
                     <span className="optionSecond">& Orders</span>

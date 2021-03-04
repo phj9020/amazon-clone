@@ -6,6 +6,11 @@ export const initialState = {
     basket: [],
 };
 
+// Selector 
+export const getBasketTotal = (basketPrice) => {
+    return basketPrice.reduce((accum, item) => accum + item, 0)
+}
+
 const reducer= (state, action) => {
     console.log(action)
     switch(action.type) {
@@ -15,7 +20,7 @@ const reducer= (state, action) => {
             };
         case REMOVE:
             return{
-                ...state, basket: state.basket.filter(item => item.id !== action.payload)
+                ...state, basket: state.basket.filter(item => item.id !== action.id)
             };
         default:
             return;

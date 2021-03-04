@@ -5,17 +5,25 @@ import Header from "components/Header";
 import Footer from "components/Footer";
 import Home from "components/Home";
 import Cart from "components/Cart";
+import Login from "components/Login";
 
 function App() {
   return (
     <div className="App">
           <Router>
-            <Header />
+            
             <Switch>
+                <Route path="/login">
+                  <Login />
+                </Route>
                 <Route path="/" exact>
+                  <Header />
                   <Home />
                 </Route>
-                <Route path="/cart" component={Cart}/>
+                <Route path="/cart">
+                  <Header />
+                  <Cart />
+                </Route>
                 <Redirect from="*" to="/" />
             </Switch>
             <Footer />

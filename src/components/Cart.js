@@ -25,8 +25,8 @@ const CartLeft = styled.div`
     .cart__container {
         padding: 20px;
 
-        h2 {
-        padding: 10px;
+        .cart__title {
+        padding: 20px 10px;
         border-bottom: 1px solid lightgrey;
         margin-bottom: 10px;
         }
@@ -94,7 +94,7 @@ function Cart() {
     const removeFromCart = (e) => {
         e.preventDefault();
         const {parentNode : {parentNode : {id}}} = e.target;
-        dispatch({type: REMOVE, payload: id});
+        dispatch({type: REMOVE, id: id});
     }
     
     return (
@@ -102,7 +102,7 @@ function Cart() {
             <CartLeft>
                 <img src="https://images-eu.ssl-images-amazon.com/images/G/31/prime/primeday/PD18/AAFeedback/Bruno/1500x300_Starts_Banner_v2._CB474351192_.gif" alt="ad" />
                 <div className="cart__container">
-                    <h2>
+                    <h2 className="cart__title">
                         Your Shopping Cart
                     </h2>
                     <div className="cart__items">
