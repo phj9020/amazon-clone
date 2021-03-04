@@ -1,5 +1,7 @@
 import React from 'react';
-import styled from 'styled-components'
+import styled from 'styled-components';
+import { useDispatch } from 'StateProvider';
+import {ADD} from 'reducer';
 
 const ProductContainer = styled.div`
     width: 100%;
@@ -30,12 +32,18 @@ const ProductContainer = styled.div`
     }
 `
 
-function Product({title, price, stars, img, alt}) {
+function Product({id, title, price, stars, img, alt}) {
+    const dispatch = useDispatch();
     
-    const onClick = (e) => {
-        e.preventDefault();
-        console.log("Add to Cart")
-        console.log(e.target.previousElementSibling.previousElementSibling.previousElementSibling.children[1].innerText)
+    const addToBasket = () => {
+        dispatch({type: ADD, payload:{
+            id: id,
+            title: title,
+            img: img,
+            price: price,
+            alt: alt,
+            stars: stars   
+        }})
     }
     return (
         <ProductContainer>
@@ -48,7 +56,7 @@ function Product({title, price, stars, img, alt}) {
                 <p>{"⭐".repeat(stars)}</p>
             </div>
             <img src={img} alt={alt} />
-            <button onClick={onClick}>Add to Basket</button>
+            <button onClick={addToBasket}>Add to Basket</button>
         </ProductContainer>
     )
 }

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import SearchIcon from '@material-ui/icons/Search';
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import  { Link } from "react-router-dom";
+import {useStateValue} from 'StateProvider';
 
 const HeaderContainer = styled.div`
     min-width: 850px;
@@ -111,6 +112,8 @@ const ShoppingCart = styled(ShoppingCartOutlinedIcon)`
 
 
 function Header() {
+    const {basket} = useStateValue();
+
     return (
         <HeaderContainer>
             <Link to="/" ><img src="http://pngimg.com/uploads/amazon/amazon_PNG25.png" alt="AmazonLogo" /></Link>
@@ -135,7 +138,7 @@ function Header() {
                 </HeaderRightOptions>
                 <Link to="/cart" className="optionCart">
                     <HeaderRightCart>
-                        <ShoppingCart /><span>Cart</span><span className="numberItems">0</span>
+                        <ShoppingCart /><span>Cart</span><span className="numberItems">{basket?.length}</span>
                     </HeaderRightCart>
                 </Link>
             </HeaderRight>
