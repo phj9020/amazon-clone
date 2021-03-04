@@ -1,9 +1,11 @@
 import { v4 as uuidv4 } from "uuid";
 export const ADD = "ADD";
 export const REMOVE = "REMOVE";
+export const SETUSER = "SETUSER";
 
 export const initialState = {
     basket: [],
+    user: null 
 };
 
 // Selector 
@@ -22,6 +24,10 @@ const reducer= (state, action) => {
             return{
                 ...state, basket: state.basket.filter(item => item.id !== action.id)
             };
+        case SETUSER :
+            return{
+                ...state, user: action.user
+            }
         default:
             return;
     }

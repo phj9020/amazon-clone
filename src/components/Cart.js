@@ -86,7 +86,7 @@ const CartRight = styled.div`
     
 `
 
-function Cart({isLoggedIn}) {
+function Cart() {
     const {basket} = useStateValue();
     const dispatch = useDispatch();
     console.log(basket)
@@ -123,7 +123,7 @@ function Cart({isLoggedIn}) {
             </CartLeft>
             <CartRight>
                 <div className="cart__subtotalbox">
-                    <Subtotal isLoggedIn={isLoggedIn} />
+                    <Subtotal />
                 </div>
             </CartRight>
         </CartContainer>

@@ -118,15 +118,15 @@ function Login() {
             let data;
             if(newAccount === true) {
                 data = await authService.createUserWithEmailAndPassword(email, password);
+                history.push("/");
             } else if (newAccount === false) {
                 data = await authService.signInWithEmailAndPassword(email, password);
                 console.log(data);
+                history.push("/");
             }
         } catch (error) {
             setError(error.message);
-        }  finally {
-            history.push("/");
-        }
+        } 
     }
 
     const toggleAccount= () => {

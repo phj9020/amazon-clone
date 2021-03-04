@@ -114,9 +114,9 @@ const ShoppingCart = styled(ShoppingCartOutlinedIcon)`
 `
 
 
-function Header({isLoggedIn, userObj}) {
-    const {basket} = useStateValue();
-    
+function Header() {
+    const {basket, user} = useStateValue();
+
     const signOut = async(e) => {
         e.preventDefault();
         try {
@@ -137,9 +137,9 @@ function Header({isLoggedIn, userObj}) {
                 </form>
             </SearchContainer>
             <HeaderRight>
-                {isLoggedIn ? (
+                {user ? (
                     <HeaderRightOptions onClick={signOut}>
-                        <span className="optionFirst">Hello! {userObj.email}</span>
+                        <span className="optionFirst">Hello! {user.email}</span>
                         <span className="optionSecond">Sign out</span>
                     </HeaderRightOptions>
                 ) : (

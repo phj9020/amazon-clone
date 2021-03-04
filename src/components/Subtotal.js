@@ -30,16 +30,16 @@ const SubTotalPriceBox = styled.div`
     }
 `
 
-function Subtotal({isLoggedIn}) {
-    const {basket} = useStateValue();
+function Subtotal() {
+    const {basket, user} = useStateValue();
     
     const basketPriceArray = basket?.map(item => parseFloat(item.itemList.price));
 
     const onClick= (e) => {
         e.preventDefault();
-        if(isLoggedIn === false){
+        if(user === null){
             alert("Please Sign in to preceed Checkout");
-        } else if(isLoggedIn === true) {
+        } else if(user) {
             console.log("preceed Checkout");
         }
     }

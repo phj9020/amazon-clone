@@ -1,4 +1,4 @@
-import React, {useEffect, useState } from 'react';
+import React, {useEffect } from 'react';
 import './App.css';
 import  { HashRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import Header from "components/Header";
@@ -7,23 +7,21 @@ import Home from "components/Home";
 import Cart from "components/Cart";
 import Login from "components/Login";
 import { authService } from 'fbase';
+import { useDispatch } from 'StateProvider';
+import {SETUSER} from 'reducer';
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userObj, setUserObj] = useState(null);
-
-  console.log(isLoggedIn)
+  const dispatch = useDispatch();
 
   useEffect(()=> {
     authService.onAuthStateChanged((user)=> {
       if(user){
-        setIsLoggedIn(true)
-        setUserObj(user)
+        dispatch({type: SETUSER, user : user})
       } else {
-        setIsLoggedIn(false)
+        dispatch({type: SETUSER, user : null})
       }
     })
-  },[])
+  },[dispatch])
 
   return (
     <div className="App">
@@ -33,12 +31,12 @@ function App() {
                   <Login />
                 </Route>
                 <Route path="/" exact>
-                  <Header isLoggedIn={isLoggedIn} userObj={userObj} />
+                  <Header />
                   <Home />
                 </Route>
                 <Route path="/cart">
-                  <Header isLoggedIn={isLoggedIn} userObj={userObj} />
-                  <Cart isLoggedIn={isLoggedIn} />
+                  <Header />
+                  <Cart />
                 </Route>
                 <Redirect from="*" to="/" />
             </Switch>
