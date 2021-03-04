@@ -1,4 +1,4 @@
-
+import { v4 as uuidv4 } from "uuid";
 export const ADD = "ADD";
 export const REMOVE = "REMOVE";
 
@@ -11,11 +11,11 @@ const reducer= (state, action) => {
     switch(action.type) {
         case ADD:
             return {
-                ...state, basket:[...state.basket, action.payload]
+                ...state, basket:[...state.basket, {itemList: action.payload, id: uuidv4() }]
             };
         case REMOVE:
             return{
-
+                ...state, basket: state.basket.filter(item => item.id !== action.payload)
             };
         default:
             return;

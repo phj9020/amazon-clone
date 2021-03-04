@@ -31,9 +31,7 @@ const SubTotalPriceBox = styled.div`
 
 function Subtotal() {
     const {basket} = useStateValue();
-
-    const basketPriceArray = basket.map(item => parseFloat(item.price));
-    console.log(basketPriceArray)
+    const basketPriceArray = basket.map(item => parseFloat(item.itemList.price));
 
     const getBasketTotal = () => {
         return basketPriceArray.reduce((accum, item) => accum + item, 0)

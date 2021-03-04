@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import Subtotal from "components/Subtotal";
-import {useStateValue} from "StateProvider";
+import {useStateValue, useDispatch} from "StateProvider";
+import {REMOVE} from 'reducer';
 
 const CartContainer = styled.div`
     width: 100%;
@@ -87,24 +88,32 @@ const CartRight = styled.div`
 
 function Cart() {
     const {basket} = useStateValue();
+    const dispatch = useDispatch();
     console.log(basket)
+
+    const removeFromCart = (e) => {
+        e.preventDefault();
+        const {parentNode : {parentNode : {id}}} = e.target;
+        dispatch({type: REMOVE, payload: id});
+    }
+    
     return (
         <CartContainer>
             <CartLeft>
                 <img src="https://images-eu.ssl-images-amazon.com/images/G/31/prime/primeday/PD18/AAFeedback/Bruno/1500x300_Starts_Banner_v2._CB474351192_.gif" alt="ad" />
                 <div className="cart__container">
                     <h2>
-                        Your Shopping Basket
+                        Your Shopping Cart
                     </h2>
                     <div className="cart__items">
-                        {basket?.map((item, index) => (
-                            <div className="cart__list" key={index}>
-                                <img src={item.img} alt={item.title} />
+                        {basket?.map((item) => (
+                            <div className="cart__list" key={item.id} id={item.id}>
+                                <img src={item.itemList.img} alt={item.itemList.title} />
                                 <div className="cart__info">
-                                    <h3>{item.title}</h3>
-                                    <p>${item.price}</p>
-                                    <p>{"⭐".repeat(item.stars)}</p>
-                                    <button>Remove from basket</button>
+                                    <h3>{item.itemList.title}</h3>
+                                    <p>${item.itemList.price}</p>
+                                    <p>{"⭐".repeat(item.itemList.stars)}</p>
+                                    <button onClick={removeFromCart}>Remove from basket</button>
                                 </div>
                             </div>
                             

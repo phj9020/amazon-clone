@@ -32,12 +32,11 @@ const ProductContainer = styled.div`
     }
 `
 
-function Product({id, title, price, stars, img, alt}) {
+function Product({title, price, stars, img, alt}) {
     const dispatch = useDispatch();
     
     const addToBasket = () => {
         dispatch({type: ADD, payload:{
-            id: id,
             title: title,
             img: img,
             price: price,
