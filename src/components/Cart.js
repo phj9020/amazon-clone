@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Subtotal from "components/Subtotal";
+import MoodBadIcon from '@material-ui/icons/MoodBad';
 import {useStateValue, useDispatch} from "StateProvider";
 import {REMOVE} from 'reducer';
 
@@ -34,7 +35,6 @@ const CartLeft = styled.div`
         .cart__items {
             min-height :400px;
             
-
             > .cart__list{
                 display:flex;
                 padding: 10px;
@@ -64,6 +64,19 @@ const CartLeft = styled.div`
                         cursor:pointer;
                         padding: 2px 5px;
                     }
+                }
+            }
+            .cart__empty {
+                width: 100%;
+                height: 400px;
+                display:flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 20px;
+
+                .MuiSvgIcon-root {
+                    margin-right: 10px;
+                    font-size: 100px;
                 }
             }
         }
@@ -106,18 +119,22 @@ function Cart() {
                         Your Shopping Cart
                     </h2>
                     <div className="cart__items">
-                        {basket?.map((item) => (
-                            <div className="cart__list" key={item.id} id={item.id}>
-                                <img src={item.itemList.img} alt={item.itemList.title} />
-                                <div className="cart__info">
-                                    <h3>{item.itemList.title}</h3>
-                                    <p>${item.itemList.price}</p>
-                                    <p>{"⭐".repeat(item.itemList.stars)}</p>
-                                    <button onClick={removeFromCart}>Remove from basket</button>
+                        {basket.length > 0 ? (
+                            basket.map((item) => (
+                                <div className="cart__list" key={item.id} id={item.id}>
+                                    <img src={item.itemList.img} alt={item.itemList.title} />
+                                    <div className="cart__info">
+                                        <h3>{item.itemList.title}</h3>
+                                        <p>${item.itemList.price}</p>
+                                        <p>{"⭐".repeat(item.itemList.stars)}</p>
+                                        <button onClick={removeFromCart}>Remove from basket</button>
+                                    </div>
                                 </div>
-                            </div>
-                            
-                            ))}
+                                ))
+                        ) : (
+                            <div className="cart__empty"><MoodBadIcon /> Your Basket is Empty </div>
+                        )}
+                       
                     </div>
                 </div>
             </CartLeft>

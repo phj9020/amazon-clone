@@ -15,6 +15,7 @@ function App() {
 
   useEffect(()=> {
     authService.onAuthStateChanged((user)=> {
+      
       if(user){
         dispatch({type: SETUSER, user : user})
       } else {
