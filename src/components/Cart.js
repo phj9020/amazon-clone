@@ -4,6 +4,7 @@ import Subtotal from "components/Subtotal";
 import MoodBadIcon from '@material-ui/icons/MoodBad';
 import {useStateValue, useDispatch} from "StateProvider";
 import {REMOVE} from 'reducer';
+import FlipMove from 'react-flip-move';
 
 const CartContainer = styled.div`
     width: 100%;
@@ -35,36 +36,39 @@ const CartLeft = styled.div`
         .cart__items {
             min-height :400px;
             
-            > .cart__list{
-                display:flex;
-                padding: 10px;
-                margin-bottom: 20px;
-                > img { 
-                    padding: 0px;
-                    width: 200px;
-                    object-fit: contain;
-                    margin-right: 20px;
-                }
+            > .cart_animation{
 
-                > .cart__info {
-                    > h3 {
-                        margin-bottom: 10px;
-                        font-size: 14px;
-                        font-weight: 500;
+                > .cart__list{
+                    display:flex;
+                    padding: 10px;
+                    margin-bottom: 20px;
+                    > img { 
+                        padding: 0px;
+                        width: 200px;
+                        object-fit: contain;
+                        margin-right: 20px;
                     }
 
-                    > p {
-                        margin-bottom: 10px;
-                    }
+                    > .cart__info {
+                        > h3 {
+                            margin-bottom: 10px;
+                            font-size: 14px;
+                            font-weight: 500;
+                        }
 
-                    > button {
-                        background-color: #f0be4c;
-                        border: 1px solid;
-                        border-color: #a88734 #9c7e31 #846a29;
-                        cursor:pointer;
-                        padding: 2px 5px;
+                        > p {
+                            margin-bottom: 15px;
+                        }
+
+                        > button {
+                            background-color: #f0be4c;
+                            border: 1px solid;
+                            border-color: #a88734 #9c7e31 #846a29;
+                            cursor:pointer;
+                            padding: 2px 5px;
+                        }
                     }
-                }
+                } 
             }
             .cart__empty {
                 width: 100%;
@@ -109,7 +113,11 @@ function Cart() {
         const {parentNode : {parentNode : {id}}} = e.target;
         dispatch({type: REMOVE, id: id});
     }
-   
+    const ticketNotVisibleState = {
+        transform: "translateX(-100%)",
+        opacity: 0.1
+      };
+
     return (
         <CartContainer>
             <CartLeft>
@@ -119,22 +127,28 @@ function Cart() {
                         Your Shopping Cart
                     </h2>
                     <div className="cart__items">
-                        {basket.length > 0 ? (
-                            basket.map((item) => (
-                                <div className="cart__list" key={item.id} id={item.id}>
-                                    <img src={item.itemList.img} alt={item.itemList.title} />
-                                    <div className="cart__info">
-                                        <h3>{item.itemList.title}</h3>
-                                        <p>${item.itemList.price}</p>
-                                        <p>{"⭐".repeat(item.itemList.stars)}</p>
-                                        <button onClick={removeFromCart}>Remove from basket</button>
+                    <FlipMove className="cart_animation"
+                        leaveAnimation={{
+                            from: {},
+                            to: ticketNotVisibleState
+                        }}
+                        >
+                            {basket.length > 0 ? (
+                                basket.map((item) => (
+                                    <div className="cart__list" key={item.id} id={item.id}>
+                                        <img src={item.itemList.img} alt={item.itemList.title} />
+                                        <div className="cart__info">
+                                            <h3>{item.itemList.title}</h3>
+                                            <p>${item.itemList.price}</p>
+                                            <p>{"⭐".repeat(item.itemList.stars)}</p>
+                                            <button onClick={removeFromCart}>Remove from basket</button>
+                                        </div>
                                     </div>
-                                </div>
-                                ))
-                        ) : (
-                            <div className="cart__empty"><MoodBadIcon /> Your Basket is Empty </div>
-                        )}
-                       
+                                    ))
+                            ) : (
+                                <div className="cart__empty"><MoodBadIcon /> Your Basket is Empty </div>
+                            )}
+                        </FlipMove>
                     </div>
                 </div>
             </CartLeft>

@@ -4,6 +4,7 @@ import CurrencyFormat from 'react-currency-format';
 import {useStateValue} from 'StateProvider';
 import { getBasketTotal } from 'reducer';
 
+
 const SubTotalPriceBox = styled.div`
     padding: 10px;
     > p {
@@ -43,7 +44,8 @@ function Subtotal() {
             console.log("preceed Checkout");
         }
     }
-    return (
+
+    return ( 
         <SubTotalPriceBox>
             <CurrencyFormat renderText={(value)=>(
                 <>
