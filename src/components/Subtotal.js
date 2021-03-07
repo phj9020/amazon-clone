@@ -2,8 +2,8 @@ import React from 'react';
 import { useHistory } from "react-router-dom";
 import styled from 'styled-components';
 import CurrencyFormat from 'react-currency-format';
-import {useStateValue} from 'StateProvider';
-import { getBasketTotal } from 'reducer';
+import {useStateValue} from '../StateProvider';
+import { getBasketTotal } from '../reducer';
 
 
 const SubTotalPriceBox = styled.div`

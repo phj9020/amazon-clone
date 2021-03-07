@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useDispatch } from 'StateProvider';
-import {ADD} from 'reducer';
+import { useDispatch } from '../StateProvider';
+import {ADD} from '../reducer';
 
 const ProductContainer = styled.div`
     width: 100%;

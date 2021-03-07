@@ -1,11 +1,11 @@
 import React, {useState, useEffect} from "react";
 import styled from "styled-components";
-import { useStateValue, useDispatch } from "StateProvider";
+import { useStateValue, useDispatch } from "../StateProvider";
 import CurrencyFormat from 'react-currency-format';
-import { getBasketTotal } from 'reducer';
-import { SETADDRESS } from "reducer";
+import { getBasketTotal } from '../reducer';
+import { SETADDRESS } from "../reducer";
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
-import axios from "axios";
+import axios from "./axios";
 import { useHistory } from "react-router-dom";
 
 const OrderContainer = styled.div`
@@ -179,15 +179,16 @@ function Payment() {
         const getClientSecret = async ()=> {
             const response = await axios({
                 method: 'post',
-                // stripe expects the total in a currencies subunits
+                // stripe expects the total in a currencies 
                 url: `/payments/create?total=${getBasketTotal(basketPriceArray) * 100}`
             });
             setClientSecret(response.data.clientSecret);
-            console.log(response.data)
         }
 
         getClientSecret();
     }, [basketPriceArray])
+
+    console.log("The SECRET is >> ", clientSecret)
 
     const saveAddress = (e) => {
         e.preventDefault();
@@ -221,7 +222,7 @@ function Payment() {
         e.preventDefault();
         setProcessing(true);
 
-        const payload = await stripe.confirmCardPayment(clientSecret, {
+        await stripe.confirmCardPayment(clientSecret, {
             payment_method: {
                 card: elements.getElement(CardElement)
             }

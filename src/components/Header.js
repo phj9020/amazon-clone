@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import SearchIcon from '@material-ui/icons/Search';
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import  { Link } from "react-router-dom";
-import {useStateValue} from 'StateProvider';
-import { authService } from 'fbase';
+import {useStateValue} from '../StateProvider';
+import { authService } from '../fbase';
 
 const HeaderContainer = styled.div`
     min-width: 900px;

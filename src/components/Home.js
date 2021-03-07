@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import MyCarousel from "components/Carousel";
-import Product from "components/Product";
+import MyCarousel from "./Carousel";
+import Product from "./Product";
 
 
 const HomeContainer = styled.div`

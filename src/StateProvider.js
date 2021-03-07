@@ -1,5 +1,5 @@
 import React, {useContext, useReducer} from 'react';
-import reducer, {initialState} from 'reducer';
+import reducer, {initialState} from './reducer';
 
 // prepares the dataLayer
 export const Context = React.createContext();

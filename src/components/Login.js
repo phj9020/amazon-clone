@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import { useHistory } from "react-router-dom";
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
-import {authService} from 'fbase';
+import {authService} from '../fbase';
 
 const LoginContainer = styled.div`
     width:100%;

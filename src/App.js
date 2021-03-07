@@ -1,15 +1,15 @@
 import React, {useEffect } from 'react';
 import './App.css';
 import  { HashRouter as Router, Route, Switch, Redirect } from "react-router-dom";
-import Header from "components/Header";
-import Footer from "components/Footer";
-import Home from "components/Home";
-import Cart from "components/Cart";
-import Login from "components/Login";
-import Payment from "components/Payment";
-import { authService } from 'fbase';
-import { useDispatch } from 'StateProvider';
-import {SETUSER} from 'reducer';
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import Home from "./components/Home";
+import Cart from "./components/Cart";
+import Login from "./components/Login";
+import Payment from "./components/Payment";
+import { authService } from './fbase';
+import { useDispatch } from './StateProvider';
+import {SETUSER} from './reducer';
 import {loadStripe} from '@stripe/stripe-js';
 import {Elements} from '@stripe/react-stripe-js';
 

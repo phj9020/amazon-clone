@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import Subtotal from "components/Subtotal";
+import Subtotal from "./Subtotal";
 import MoodBadIcon from '@material-ui/icons/MoodBad';
-import {useStateValue, useDispatch} from "StateProvider";
-import {REMOVE} from 'reducer';
+import {useStateValue, useDispatch} from "../StateProvider";
+import {REMOVE} from '../reducer';
 import FlipMove from 'react-flip-move';
 
 const CartContainer = styled.div`
