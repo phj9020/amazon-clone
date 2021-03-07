@@ -6,7 +6,7 @@ import {authService} from 'fbase';
 
 const LoginContainer = styled.div`
     width:100%;
-    min-width: 850px;
+    min-width: 900px;
     min-height: 60vh;
     background-color: white;
     display: flex;

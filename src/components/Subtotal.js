@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from "react-router-dom";
 import styled from 'styled-components';
 import CurrencyFormat from 'react-currency-format';
 import {useStateValue} from 'StateProvider';
@@ -33,16 +34,17 @@ const SubTotalPriceBox = styled.div`
 
 function Subtotal() {
     const {basket, user} = useStateValue();
-    
     const basketPriceArray = basket?.map(item => parseFloat(item.itemList.price));
+    const history = useHistory();
 
     const onClick= (e) => {
         e.preventDefault();
         if(user === null){
             alert("Please Sign in to preceed Checkout");
-        } else if(user) {
-            console.log("preceed Checkout");
-        }
+        } else if(user && basket.length === 0) {
+            alert("Your basket is empty");
+        } else if(user && basket.length >= 1)
+            history.push("/payment");
     }
 
     return ( 

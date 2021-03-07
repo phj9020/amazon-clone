@@ -7,7 +7,7 @@ import {useStateValue} from 'StateProvider';
 import { authService } from 'fbase';
 
 const HeaderContainer = styled.div`
-    min-width: 850px;
+    min-width: 900px;
     height: 70px;
     background-color: var(--amazon-bg-color);
     display:flex;

@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const FooterContainer = styled.div`
     width: 100%;
-    min-width: 850px;
+    min-width: 900px;
     height: 300px;
     background-color: #232f3e;
     display:flex;
@@ -35,7 +35,7 @@ const FooterContainer = styled.div`
 
 const FooterLogo= styled.div`
     width: 100%;
-    min-width: 850px;
+    min-width: 900px;
     height: 70px;
     background-color: #232f3e;
     display:flex;

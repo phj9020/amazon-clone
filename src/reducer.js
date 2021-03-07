@@ -2,10 +2,12 @@ import { v4 as uuidv4 } from "uuid";
 export const ADD = "ADD";
 export const REMOVE = "REMOVE";
 export const SETUSER = "SETUSER";
+export const SETADDRESS = "SETADDRESS";
 
 export const initialState = {
     basket: [],
-    user: null 
+    user: null,
+    userAddress: null 
 };
 
 // Selector 
@@ -27,6 +29,10 @@ const reducer= (state, action) => {
         case SETUSER :
             return{
                 ...state, user: action.user
+            }
+        case SETADDRESS :
+            return {
+                ...state, userAddress: action.userAddress
             }
         default:
             return;

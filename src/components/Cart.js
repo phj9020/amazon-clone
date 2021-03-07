@@ -8,7 +8,7 @@ import FlipMove from 'react-flip-move';
 
 const CartContainer = styled.div`
     width: 100%;
-    min-width: 850px;
+    min-width: 900px;
     background-color: white;
     display:flex;
 
@@ -113,10 +113,7 @@ function Cart() {
         const {parentNode : {parentNode : {id}}} = e.target;
         dispatch({type: REMOVE, id: id});
     }
-    const ticketNotVisibleState = {
-        transform: "translateX(-100%)",
-        opacity: 0.1
-      };
+
 
     return (
         <CartContainer>
@@ -127,12 +124,7 @@ function Cart() {
                         Your Shopping Cart
                     </h2>
                     <div className="cart__items">
-                    <FlipMove className="cart_animation"
-                        leaveAnimation={{
-                            from: {},
-                            to: ticketNotVisibleState
-                        }}
-                        >
+                    <FlipMove className="cart_animation">
                             {basket.length > 0 ? (
                                 basket.map((item) => (
                                     <div className="cart__list" key={item.id} id={item.id}>
