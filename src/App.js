@@ -7,6 +7,7 @@ import Home from "./components/Home";
 import Cart from "./components/Cart";
 import Login from "./components/Login";
 import Payment from "./components/Payment";
+import Orders from "./components/Orders";
 import { authService } from './fbase';
 import { useDispatch } from './StateProvider';
 import {SETUSER} from './reducer';
@@ -14,7 +15,7 @@ import {loadStripe} from '@stripe/stripe-js';
 import {Elements} from '@stripe/react-stripe-js';
 
 
-const stripePromise  = loadStripe(process.env.REACT_APP_STRIPE_API_KEY)
+const stripePromise  = loadStripe("pk_test_51ISGh0LEssIVFr3lL9uqnk0EAkTOBQQrU3gdpnaYxD76PV8DGIrhElyGsiNgsWS80Sl1Cbz2CCn6VwfAxErvCKIj00QUdKQT6c")
 
 function App() {
   const dispatch = useDispatch();
@@ -50,6 +51,10 @@ function App() {
                   <Elements stripe={stripePromise}>
                     <Payment />
                   </Elements>
+                </Route>
+                <Route path="/orders">
+                  <Header />
+                  <Orders />
                 </Route>
                 <Redirect from="*" to="/" />
             </Switch>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import styled from "styled-components";
 import MyCarousel from "./Carousel";
 import Product from "./Product";
@@ -63,6 +63,9 @@ const ProductContainer = styled.div`
 `
 
 function Home() {
+  useEffect(()=> {
+    window.scrollTo(0,0);
+  }, [])
   return (
     <HomeContainer>
         <MyCarousel />

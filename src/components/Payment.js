@@ -3,10 +3,11 @@ import styled from "styled-components";
 import { useStateValue, useDispatch } from "../StateProvider";
 import CurrencyFormat from 'react-currency-format';
 import { getBasketTotal } from '../reducer';
-import { SETADDRESS } from "../reducer";
+import { SETADDRESS,EMPTY_BASKET, REMOVE } from "../reducer";
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import axios from "./axios";
 import { useHistory } from "react-router-dom";
+import {dbService} from '../fbase';
 
 const OrderContainer = styled.div`
     width: 100%;
@@ -20,7 +21,6 @@ const OrderContainer = styled.div`
 
     > .order__checkout {
         width: 100%;
-        
         margin: 0px auto;
         border: 1px solid lightgrey;
         background-color: white;
@@ -137,6 +137,7 @@ const OrderContainer = styled.div`
                         > button{
                             margin-top: 15px;
                             padding: 5px;
+                            cursor: pointer;
                         }
                     }
 
@@ -158,7 +159,7 @@ function Payment() {
     const [name, setName] = useState('');
 
     // data from reducer
-    const { basket, userAddress } = useStateValue();
+    const { basket,user, userAddress } = useStateValue();
     const dispatch = useDispatch();
 
     const basketPriceArray = basket?.map(item => parseFloat(item.itemList.price));
@@ -175,6 +176,7 @@ function Payment() {
     let history = useHistory();
 
     useEffect(()=> {
+        window.scrollTo(0, 0);
         // generate the special stripe secret which allows us to charge a customer 
         const getClientSecret = async ()=> {
             const response = await axios({
@@ -182,11 +184,13 @@ function Payment() {
                 // stripe expects the total in a currencies 
                 url: `/payments/create?total=${getBasketTotal(basketPriceArray) * 100}`
             });
+
             setClientSecret(response.data.clientSecret);
         }
 
         getClientSecret();
-    }, [basketPriceArray])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[basket])
 
     console.log("The SECRET is >> ", clientSecret)
 
@@ -210,12 +214,18 @@ function Payment() {
         } else if(id === "city"){
             setCity(value);
         } else if(id === "name"){
-            setName(value);
+        setName(value);
         }
     }
 
     const changeAddress = () => {
         dispatch({type:SETADDRESS, userAddress: null})
+    }
+
+    const removeFromBasket = (e)=> {
+        e.preventDefault();
+        const {parentNode : { parentNode : {id}}} = e.target;
+        dispatch({type:REMOVE, id: id})
     }
 
     const handlePaymentSubmit = async(e) => {
@@ -228,9 +238,22 @@ function Payment() {
             }
         }).then(({paymentIntent}) => {
             // paymentIntent = payment confirmation 
+            
             setSucceeded(true);
             setError(null);
             setProcessing(false);
+
+            // send order data of easch User to FireStore before empty cart 
+            dbService.collection("user").doc(user?.uid).collection("orders").doc(paymentIntent.id).set({
+                basket : basket, 
+                amount: paymentIntent.amount, 
+                created: paymentIntent.created
+            })
+
+            // empty cart 
+            dispatch({type: EMPTY_BASKET})
+
+            // redirect to order page
             history.replace('/orders');
         })
     }
@@ -239,6 +262,8 @@ function Payment() {
         setDisabled(e.empty);
         setError(e.error ? e.error.message : "");
     }
+
+
     return (
     <OrderContainer>
       <h1>
@@ -276,13 +301,13 @@ function Payment() {
                 <h2>My items</h2>
                 <div className="order__reviewItems" >
                     {basket?.map((item, index) => (
-                        <div className="order__reviewSingleItem" key={index}>
+                        <div className="order__reviewSingleItem" key={index} id={item.id}>
                             <img src={item.itemList.img} alt={item.itemList.title} />
                             <div className="order__reviewItems__info">
                                 <h3>{item.itemList.title}</h3>
                                 <p>${item.itemList.price}</p>
                                 <p>{"⭐".repeat(item.itemList.stars)}</p>
-                                <button>Remove from Basket</button>
+                                <button onClick={removeFromBasket}>Remove from Basket</button>
                             </div>
                         </div>
                     ))}
@@ -306,7 +331,7 @@ function Payment() {
                                 thousandsSeparator={true}
                                 prefix={"$"}
                                 />
-                            <button disabled={processing || disabled || succeeded}>
+                            <button disabled={processing || disabled || succeeded || userAddress === null }>
                                 <span>{processing ? <p>Processing..</p> : <p>Buy Now</p>}</span>
                             </button>
                         </div>

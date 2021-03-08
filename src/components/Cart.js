@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import styled from 'styled-components';
 import Subtotal from "./Subtotal";
 import MoodBadIcon from '@material-ui/icons/MoodBad';
@@ -107,6 +107,10 @@ function Cart() {
     const {basket} = useStateValue();
     const dispatch = useDispatch();
     console.log(basket)
+
+    useEffect(()=> {
+        window.scrollTo(0, 0);
+    }, [])
 
     const removeFromCart = (e) => {
         e.preventDefault();

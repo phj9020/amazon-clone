@@ -5,6 +5,7 @@ import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import  { Link } from "react-router-dom";
 import {useStateValue} from '../StateProvider';
 import { authService } from '../fbase';
+import { useHistory } from "react-router-dom";
 
 const HeaderContainer = styled.div`
     min-width: 900px;
@@ -117,10 +118,14 @@ const ShoppingCart = styled(ShoppingCartOutlinedIcon)`
 function Header() {
     const {basket, user} = useStateValue();
 
+    let history = useHistory();
+
     const signOut = async(e) => {
         e.preventDefault();
         try {
             await authService.signOut();
+            history.push("/");
+
         } catch (err) {
             console.log(err);
         } 
@@ -150,11 +155,12 @@ function Header() {
                     </HeaderRightOptions>
                 </Link>
                 )}
-                
-                <HeaderRightOptions>
-                    <span className="optionFirst">Returns</span>
-                    <span className="optionSecond">& Orders</span>
-                </HeaderRightOptions>
+                <Link to="/orders" >
+                    <HeaderRightOptions>
+                        <span className="optionFirst">Returns</span>
+                        <span className="optionSecond">& Orders</span>
+                    </HeaderRightOptions>
+                </Link>
                 <HeaderRightOptions>
                     <span className="optionFirst">Your</span>
                     <span className="optionSecond">Prime</span>

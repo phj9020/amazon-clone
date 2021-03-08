@@ -3,6 +3,7 @@ export const ADD = "ADD";
 export const REMOVE = "REMOVE";
 export const SETUSER = "SETUSER";
 export const SETADDRESS = "SETADDRESS";
+export const EMPTY_BASKET = "EMPTY_BASKET"
 
 export const initialState = {
     basket: [],
@@ -33,6 +34,10 @@ const reducer= (state, action) => {
         case SETADDRESS :
             return {
                 ...state, userAddress: action.userAddress
+            }
+        case EMPTY_BASKET :
+            return {
+                ...state, basket: []
             }
         default:
             return;
