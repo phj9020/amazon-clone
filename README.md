@@ -4,7 +4,7 @@ Amazon Clone website using React.js, firebase, and stripe for payment
 
 # Preview
 
-Try it on [Firebase-Hosting](https://clone-f8fa9.web.app)
+Try it on [Amazon-Clone](https://clone-f8fa9.web.app)
 
 
 # Notice 
