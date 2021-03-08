@@ -100,8 +100,8 @@ function SingleOrder({order}) {
             </div>
             <div className="order__container">
                 <div className="order__items">
-                    {order.basket.map(item => (
-                        <div className="order__item">
+                    {order.basket.map((item, index) => (
+                        <div className="order__item" key={index}>
                             <img src={item.itemList.img} alt={item.itemList.title} />
                             <div className="order__item-info">
                                 <h3>{item.itemList.title}</h3>

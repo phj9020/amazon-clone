@@ -62,8 +62,8 @@ function Orders() {
                     <h1>Order History</h1>
                     <div className="order__history">
                         {orders.length >= 1  ? (
-                            orders?.map(order => (
-                                <SingleOrder order={order} />
+                            orders?.map((order, index) => (
+                                <SingleOrder order={order} key={index} />
                             ))
                         ) : (
                             <p>
