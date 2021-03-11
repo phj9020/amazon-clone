@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import styled from "styled-components";
 import { useStateValue, useDispatch } from "../StateProvider";
+import Helmet from "react-helmet";
 import CurrencyFormat from 'react-currency-format';
 import { getBasketTotal } from '../reducer';
 import { SETADDRESS,EMPTY_BASKET, REMOVE } from "../reducer";
@@ -266,6 +267,9 @@ function Payment() {
 
     return (
     <OrderContainer>
+        <Helmet>
+            <title>Checkout | Amazon</title>
+        </Helmet>
       <h1>
         Checkout (
         {basket.length === 1

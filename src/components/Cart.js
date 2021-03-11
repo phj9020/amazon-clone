@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import styled from 'styled-components';
 import Subtotal from "./Subtotal";
+import Helmet from "react-helmet";
 import MoodBadIcon from '@material-ui/icons/MoodBad';
 import {useStateValue, useDispatch} from "../StateProvider";
 import {REMOVE} from '../reducer';
@@ -121,6 +122,9 @@ function Cart() {
 
     return (
         <CartContainer>
+            <Helmet>
+                <title>Cart | Amazon</title>
+            </Helmet>
             <CartLeft>
                 <img src="https://images-eu.ssl-images-amazon.com/images/G/31/prime/primeday/PD18/AAFeedback/Bruno/1500x300_Starts_Banner_v2._CB474351192_.gif" alt="ad" />
                 <div className="cart__container">

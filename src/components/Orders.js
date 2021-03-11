@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
+import Helmet from "react-helmet";
 import {dbService} from "../fbase";
 import {useStateValue} from "../StateProvider";
 import SingleOrder from './SingleOrder';
@@ -57,6 +58,9 @@ function Orders() {
 
     return (
         <OrderContainer>
+            <Helmet>
+                <title>Order History | Amazon</title>
+            </Helmet>
             <div className="order__wrapper">
                 <div className="order__confirmation">
                     <h1>Order History</h1>

@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import { useHistory } from "react-router-dom";
 import styled from 'styled-components';
+import Helmet from "react-helmet";
 import {Link} from 'react-router-dom';
 import {authService} from '../fbase';
 
@@ -135,6 +136,9 @@ function Login() {
 
     return (
         <LoginContainer>
+            <Helmet>
+                <title>Login | Amazon</title>
+            </Helmet>
             <div className="login__wrapper">
                 <Link to="/" ><img src="http://media.corporate-ir.net/media_files/IROL/17/176060/Oct18/Amazon%20logo.PNG" alt="AmazonLogo" /></Link>
                 <div className="login__box">

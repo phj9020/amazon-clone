@@ -2,7 +2,7 @@ import React, {useEffect} from "react";
 import styled from "styled-components";
 import MyCarousel from "./Carousel";
 import Product from "./Product";
-
+import Helmet from "react-helmet";
 
 const HomeContainer = styled.div`
     width: 100%;
@@ -68,6 +68,9 @@ function Home() {
   }, [])
   return (
     <HomeContainer>
+        <Helmet>
+          <title>Home | Amazon</title>
+        </Helmet>
         <MyCarousel />
         <ProductContainer>
             <div className="grid_container">
